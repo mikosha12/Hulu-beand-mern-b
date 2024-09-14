@@ -46,7 +46,10 @@ app.use(
   })
 );
 
-app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+//app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+app.get('/', (req, res) => {
+  res.send('Hello from the root path!'); // Or render a view if you're using templates
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -59,8 +62,11 @@ app.use("/api/rooms", roomRoutes);
 app.use("/api/transactions", TransactionRoutes);
 app.use("/api/notifications", notificationsRoutes);
 
-app.get("*", (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+// app.get("*", (req: Request, res: Response) => {
+//   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+// });
+app.get('/', (req: Request, res: Response) => {
+  res.send(./index.html); // Or render a view if you're using templates
 });
 
 app.listen(7000, () => {
